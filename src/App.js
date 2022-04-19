@@ -33,7 +33,18 @@ function App() {
       <h1>My Memory</h1>
       <button onClick={shuffle}>New Game</button>
 
-   
+      <div className="card-grid">
+        {cards.map(card => (
+          <div className="card" key={card.id}> 
+            <div>
+              <img className="front" src={card.src} alt="card front"/> {/** front side */}
+              <img className="back" src="/img/cover.png" alt="card back" />
+            </div>
+
+          </div>
+
+        ))}
+      </div>
     </div>
   );
   
