@@ -1,5 +1,4 @@
-import { useEffect, useInsertionEffect } from 'react'
-import singleCard from './SingleCard.css'
+import './SingleCard.css'
 
 function SingleCard({ card, handleChoice, flipped, disabled}) {
 
@@ -9,7 +8,7 @@ function SingleCard({ card, handleChoice, flipped, disabled}) {
 			handleChoice(card)
 		}
 	}
-	
+
   return (
     <div className="card"> 
         <div className={flipped ? "flipped" : ""}>
