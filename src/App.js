@@ -26,6 +26,8 @@ function App() {
 			.sort(() => Math.random() - 0.5) // negative number = order remains, else switch them around
 			.map((card) => ({ ...card, id: Math.random()})) // add id for each card-object
 
+		setChoiceOne(null) // IF a card is alreade selected
+		setChoiceTwo(null)
 		setCards(shuffledCards) //update state
 		setTurns(0) // counter
   }
@@ -64,7 +66,6 @@ function App() {
 		}
 	}, [choiceOne, choiceTwo])
 
-	console.log(cards)
 	//---------------------------------------------------------------------------
 
 	// reset choices and increase turn with +1
@@ -76,7 +77,10 @@ function App() {
 	}
 	//---------------------------------------------------------------------------
 
-
+	// start new game automatically
+	useEffect(()=> {
+		shuffle()
+	}, [])
   return (
 		<div className="App">
 			<h1>My Memory</h1>
@@ -94,6 +98,7 @@ function App() {
 					/>
 				))}
 			</div>
+			<p>Turns: {turns}</p>
 	</div>
   );
   
