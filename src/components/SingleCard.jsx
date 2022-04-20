@@ -1,7 +1,7 @@
 import { useEffect, useInsertionEffect } from 'react'
 import singleCard from './SingleCard.css'
 
-function SingleCard({ card, handleChoice }) {
+function SingleCard({ card, handleChoice, flipped }) {
 
 	//här vill vi uppdatera state i choiseOne eller two i app.js
 	const handleClick = () => {
@@ -12,7 +12,7 @@ function SingleCard({ card, handleChoice }) {
 
   return (
     <div className="card"> 
-        <div>
+        <div className={flipped ? "flipped" : ""}>
         	<img className="front" src={card.src} alt="card front"/> {/** front side */}
         	<img className="back" 
 				src="/img/cover.png" 
