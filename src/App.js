@@ -3,12 +3,12 @@ import './App.css';
 import SingleCard from './components/SingleCard';
 
 const cardImg = [
-  {"src": "/img/helmet-1.png"},
-  {"src": "/img/potion-1.png"},
-  {"src": "/img/ring-1.png"},
-  {"src": "/img/scroll-1.png"},
-  {"src": "/img/shield-1.png"},
-  {"src": "/img/sword-1.png"},
+  {"src": "/img/helmet-1.png", matched: false},
+  {"src": "/img/potion-1.png", matched: false},
+  {"src": "/img/ring-1.png", matched: false},
+  {"src": "/img/scroll-1.png", matched: false},
+  {"src": "/img/shield-1.png", matched: false},
+  {"src": "/img/sword-1.png", matched: false},
 ]
 
 function App() {
@@ -40,12 +40,21 @@ function App() {
 
 	// ------------------------------------------------------------------------
 
-  //compare two cards. avfyras inte förrän något har ändras 
+  //compare two cards. avfyras inte förrän något har ändrats 
 	useEffect(() => {
 		if (choiceOne && choiceTwo) {
-
+			// if they match, update state. take prev state to update state. return a new array of cards- take prev cards and map a new array. fire a function
 			if (choiceOne.src === choiceTwo.src) {
-				console.log('Yey, they match!')
+				//uppdate state
+				setCards(prevCards => {
+					return prevCards.map(card => {
+						if (card.src === choiceOne.src) {
+							return {...card, matched: true}
+						} else {
+							return card
+						}
+					})
+				})
 				resetTurn()
 			} else {
 				console.log('No match :(')
@@ -56,6 +65,7 @@ function App() {
 		}
 	}, [choiceOne, choiceTwo])
 
+	console.log(cards)
 	//---------------------------------------------------------------------------
 
 	// reset choices and increase turn with +1
@@ -79,6 +89,7 @@ function App() {
 						key={card.id} 
 						card={card} 
 						handleChoice={handleChoice}
+						flipped={card === choiceOne || card === choiceTwo || card.matched}
 					/>
 				))}
 			</div>
