@@ -1,11 +1,13 @@
 import { useEffect, useInsertionEffect } from 'react'
 import singleCard from './SingleCard.css'
 
-function SingleCard({ card, handleChoice, flipped }) {
+function SingleCard({ card, handleChoice, flipped, disabled}) {
 
 	//här vill vi uppdatera state i choiseOne eller two i app.js
 	const handleClick = () => {
-		handleChoice(card)
+		if (!disabled) {
+			handleChoice(card)
+		}
 	}
 
 

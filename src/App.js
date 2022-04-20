@@ -16,6 +16,7 @@ function App() {
   const [turns, setTurns] = useState(0)  // how many turns a user is taking to complete the game // counter beginns at 0
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [disabled, setDisabled] = useState(false)
 
 //------------------------------------------------------------
 
@@ -43,6 +44,7 @@ function App() {
   //compare two cards. avfyras inte förrän något har ändrats 
 	useEffect(() => {
 		if (choiceOne && choiceTwo) {
+			setDisabled(true)
 			// if they match, update state. take prev state to update state. return a new array of cards- take prev cards and map a new array. fire a function
 			if (choiceOne.src === choiceTwo.src) {
 				//uppdate state
@@ -70,6 +72,7 @@ function App() {
 		setChoiceOne(null)
 		setChoiceTwo(null)
 		setTurns(prevTurns => prevTurns + 1)
+		setDisabled(false)
 	}
 	//---------------------------------------------------------------------------
 
@@ -87,6 +90,7 @@ function App() {
 						card={card} 
 						handleChoice={handleChoice}
 						flipped={card === choiceOne || card === choiceTwo || card.matched}
+						disabled={disabled}
 					/>
 				))}
 			</div>
