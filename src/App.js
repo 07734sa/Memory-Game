@@ -57,10 +57,7 @@ function App() {
 				})
 				resetTurn()
 			} else {
-				console.log('No match :(')
-				setChoiceOne(null)
-				setChoiceTwo(null)
-				setTurns(prevTurns => prevTurns + 1)
+				setTimeout(()=> resetTurn(), 1000)
 			}
 		}
 	}, [choiceOne, choiceTwo])
