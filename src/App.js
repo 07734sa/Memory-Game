@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import './App.css';
 import SingleCard from './components/SingleCard';
+// import Alert from './components/Alert';
 
 const cardImg = [
   {"src": "/img/helmet-1.png", matched: false},
@@ -17,7 +18,8 @@ function App() {
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
   const [disabled, setDisabled] = useState(false)
-
+	const [showAlert, setShowAlert] = useState(true)
+	console.log('SHOW ALERT', showAlert)
 //------------------------------------------------------------
 
   // shuffle cards
@@ -29,37 +31,48 @@ function App() {
 		setChoiceOne(null) // IF a card is alreade selected
 		setChoiceTwo(null)
 		setCards(shuffledCards) //update state
+		console.log(cards)
 		setTurns(0) // counter
   }
-  //console.log('Show cards: ', cards, 'show turns:', turns)
 
   //-----------------------------------------------------------
-  
+
   // handle choice
   const handleChoice = (card)  => {
-		// om null = false så finns ett värde, annars true
 		choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+		console.log(card)
+
   }
 
 	// ------------------------------------------------------------------------
+	// handle Alert button
+	const handleAlertClick = () => {
+		setShowAlert(false)
+	}
 
-  //compare two cards. avfyras inte förrän något har ändrats 
+// ------------------------------------------------------------------------
+
+	
+  //compare two cards. will fire if something has chnaged
 	useEffect(() => {
 		if (choiceOne && choiceTwo) {
 			setDisabled(true)
-			// if they match, update state. take prev state to update state. return a new array of cards- take prev cards and map a new array. fire a function
+
 			if (choiceOne.src === choiceTwo.src) {
 				//uppdate state
 				setCards(prevCards => {
 					return prevCards.map(card => {
 						if (card.src === choiceOne.src) {
+
 							return {...card, matched: true}
+
 						} else {
 							return card
 						}
 					})
 				})
 				resetTurn()
+
 			} else {
 				setTimeout(()=> resetTurn(), 1000)
 			}
@@ -81,6 +94,9 @@ function App() {
 	useEffect(()=> {
 		shuffle()
 	}, [])
+
+
+
   return (
 		<div className="App">
 			<h1>My Memory</h1>
@@ -88,7 +104,6 @@ function App() {
 
 			<div className="card-grid">
 				{cards.map(card => (
-
 					<SingleCard 
 						key={card.id} 
 						card={card} 
@@ -99,7 +114,17 @@ function App() {
 				))}
 			</div>
 			<p>Turns: {turns}</p>
-	</div>
+
+			{/* //! finish alert box */}
+{/* 
+			{showAlert && (
+				<Alert>
+					<h2>Awesome!</h2>
+					<p>You made it in {turns} attemts</p>
+					<button onClick= {handleAlertClick}>Play Again</button>
+				</Alert>
+			)} */}
+		</div>
   );
   
 }
