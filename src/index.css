@@ -10,7 +10,9 @@ body {
     font-size: 1rem;
     text-align: center;
     background: #1b1523;
-    color: #fff
+    color: #fff;
+    margin: 0 auto;
+    max-width: 1200px;
 }
 
 @media screen and (min-width: 578px) {
