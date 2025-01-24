@@ -105,9 +105,10 @@ function App() {
 	}
 	//---------------------------------------------------------------------------
 
-	// start new game automatically
+	// start new game
 	useEffect(() => {
 		shuffle()
+		// eslint-disable-next-line
 	}, [])
 
 
